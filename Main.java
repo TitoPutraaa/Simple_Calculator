@@ -3,7 +3,7 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         char simbol = '.';
-        System.out.println("\n    KALKULATORrrrr");
+        System.out.println("\n    KALKULATOR");
         // input bilangan 
         
         System.out.print("num = ");
