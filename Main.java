@@ -3,7 +3,6 @@ public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         char simbol = '.';
-        double hasil= 0;
         System.out.println("\n    KALKULATOR");
         // input bilangan 
         
@@ -12,52 +11,49 @@ public class Main {
         System.out.print("Penghitungan ('+' '-' '*' ':') = ");
         simbol = scan.next().charAt(0);
         System.out.print("num = ");
-        double bil2 = scan.nextDouble();
+        double bil2 = scan.nextDouble(); 
+
+        double hasil = hitung(simbol, bil1, bil2);
+        System.out.println(hasil);
+        while (true) {
+            double nextHasil =  aritmatic(bil1, bil2, simbol, scan, hasil);
+            System.out.println(nextHasil);
+            double lopHitung = aritmatic(bil1, bil2, simbol, scan, nextHasil);
+        }
+    }
         
+        static double hitung(char simbol, double bil1 ,double bil2) {
         switch (simbol) {
                 case '+':
-                hasil = bil1 + bil2;
-                    System.out.println(bil1 + " + " + bil2 + " = " + hasil);
-                    break;
+                    return bil1 + bil2;
                 case '-':
-                    System.out.println(bil1 + " - " + bil2 + " = " + (bil1 - bil2));
-                    break;
+                    return bil1 - bil2;          
                 case '*':
-                    System.out.println(bil1 + " * " + bil2 + " = " + (bil1 * bil2));
-                break;
+                    return bil1 * bil2;          
                 case ':':
-                    System.out.println(bil1 + " : " + bil2 + " = " + (bil1 / bil2));
-                break;   
+                    return bil1 / bil2;                
                 default:
-                    System.out.println("SIMBOL PERHITUNGAN ARITMATIKA SALAH! // pilih antara ('+' '-' '*' ':')");
-                break;
+                    return 0;          
+
             }
-            aritmatic(bil1, bil2, simbol, scan, hasil);
         }
         
-        static void aritmatic(double bil1, double bil2, char simbol, Scanner scan, double hasil) {
-            while (true) {
+        static double aritmatic(double bil1, double bil2, char simbol, Scanner scan, double hasil) {
             System.out.print("Penghitungan ('+' '-' '*' ':') = ");
             simbol = scan.next().charAt(0);
             System.out.print("num = ");
             double bil = scan.nextDouble();
-            switch (simbol) {
-                case '+':
-                    System.out.println(hasil + bil);
-                    break;
-                case '-':
-                    System.out.println(bil1 + " - " + bil2 + " = " + (bil1 - bil2));
-                    break;
-                case '*':
-                    System.out.println(bil1 + " * " + bil2 + " = " + (bil1 * bil2));
-                    break;
-                case ':':
-                    System.out.println(bil1 + " : " + bil2 + " = " + (bil1 / bil2));
-                    break;   
-                default:
-                    System.out.println("SIMBOL PERHITUNGAN ARITMATIKA SALAH! // pilih antara ('+' '-' '*' ':')");
-                    break;
-                    }
+                switch (simbol) {
+                    case '+':
+                        return hasil + bil;
+                    case '-':
+                        return hasil - bil;
+                    case '*':
+                        return hasil * bil;
+                    case ':':
+                        return hasil / bil;   
+                    default:
+                        return 0;
                 }
         }
 }
