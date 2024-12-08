@@ -1,11 +1,12 @@
+// KALKULATOR
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
         Scanner scan = new Scanner(System.in);
         char simbol = '.';
         System.out.println("\n    KALKULATOR");
-        // input bilangan 
-        
+
+        // input perhitungan pertama 
         System.out.print("num = ");
         double bil1 = scan.nextDouble();
         System.out.print("Penghitungan ('+' '-' '*' ':') = ");
@@ -13,45 +14,55 @@ public class Main {
         System.out.print("num = ");
         double bil2 = scan.nextDouble(); 
 
-        double hasil = hitung(simbol, bil1, bil2);
-        System.out.println(hasil);
-        while (true) {
-            double nextHasil =  aritmatic(bil1, bil2, simbol, scan, hasil);
-            System.out.println(nextHasil);
-            double lopHitung = aritmatic(bil1, bil2, simbol, scan, nextHasil);
-        }
+        // call method to count first calculation 
+        double hasil = hitung(simbol, bil1, bil2); // call mmethod to count first calculation and restore to 'hasil' variable
+        aritmatic(bil1, bil2, simbol, scan, hasil); // call method to count 'hasil' and next calculation 
+
     }
         
-        static double hitung(char simbol, double bil1 ,double bil2) {
+    static double hitung(char simbol, double bil1 ,double bil2) { // method to count first calculation
         switch (simbol) {
-                case '+':
-                    return bil1 + bil2;
-                case '-':
+            case '+':
+                System.out.println(bil1 + " + " + bil2 + " = " + (bil1 + bil2) ); // to print result of the calculation
+                    return bil1 + bil2; // return result calculation to method so next method can use this result 
+            case '-':
+                System.out.println(bil1 + " - " + bil2 + " = " + (bil1 - bil2) );
                     return bil1 - bil2;          
-                case '*':
+            case '*':
+                System.out.println(bil1 + " * " + bil2 + " = " + (bil1 * bil2) );
                     return bil1 * bil2;          
-                case ':':
+            case ':':
+            System.out.println(bil1 + " : " + bil2 + " = " + (bil1 / bil2) );
                     return bil1 / bil2;                
-                default:
+            default:
                     return 0;          
 
             }
         }
         
-        static double aritmatic(double bil1, double bil2, char simbol, Scanner scan, double hasil) {
-            System.out.print("Penghitungan ('+' '-' '*' ':') = ");
-            simbol = scan.next().charAt(0);
-            System.out.print("num = ");
+        static double aritmatic(double bil1, double bil2, char simbol, Scanner scan, double hasil) { // method to count result for previous method to next calculation
+            double temp = hasil; // to keep hasil value
+            System.out.print("Penghitungan ('+' '-' '*' ':') = "); // pick new calculaton
+            simbol = scan.next().charAt(0); 
+            System.out.print("num = "); // add new number and calculate with previous calculation
             double bil = scan.nextDouble();
                 switch (simbol) {
                     case '+':
-                        return hasil + bil;
+                        hasil += bil;
+                        System.out.println(temp + " + " + bil + " = " + hasil);
+                        return hasil + bil + aritmatic(bil1, bil2, simbol, scan, hasil); // to return result number and to looping the method so we can make new calculation with previos calculation 
                     case '-':
-                        return hasil - bil;
+                        hasil -= bil;
+                        System.out.println(temp + " - " + bil + " = " + hasil);
+                        return hasil - bil + aritmatic(bil1, bil2, simbol, scan, hasil);
                     case '*':
-                        return hasil * bil;
+                        hasil *= bil;
+                        System.out.println(temp + " * " + bil + " = " + hasil);
+                        return hasil *  bil + aritmatic(bil1, bil2, simbol, scan, hasil);
                     case ':':
-                        return hasil / bil;   
+                        hasil /= bil;
+                        System.out.println(temp + " : " + bil + " = " + hasil);
+                        return hasil / bil + aritmatic(bil1, bil2, simbol, scan, hasil);
                     default:
                         return 0;
                 }
