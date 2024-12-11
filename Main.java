@@ -1,4 +1,5 @@
 // KALKULATOR
+// created by Tito.ptr
 import java.util.Scanner;
 public class Main {
     public static void main(String[] args) {
